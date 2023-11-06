@@ -16,8 +16,6 @@ namespace RestSharpDemoProject
             Console.WriteLine("STATUS CODE: " + response.StatusCode);
 
             var issues = JsonSerializer.Deserialize<List<Issue>>(response.Content);
-            
-
 
             foreach (var issue in issues)
             {
