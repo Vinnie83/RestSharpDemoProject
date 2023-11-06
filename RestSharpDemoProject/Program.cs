@@ -9,18 +9,21 @@ namespace RestSharpDemoProject
         {
             RestClient client = new RestClient("https://api.github.com");
 
-            RestRequest request = new RestRequest("repos/Vinnie83/postman/issues/1", Method.Get);
+            RestRequest request = new RestRequest("repos/Vinnie83/postman/issues", Method.Get);
 
             var response = client.Execute(request);
 
             Console.WriteLine("STATUS CODE: " + response.StatusCode);
 
-            var issue = JsonSerializer.Deserialize<Issue>(response.Content);
+            var issues = JsonSerializer.Deserialize<List<Issue>>(response.Content);
             
 
-            Console.WriteLine("Issue Title: " + issue.name);
-            Console.WriteLine("Issue number: " + issue.number);
-                   
+
+            foreach (var issue in issues)
+            {
+                Console.WriteLine("Issue Title: " + issue.title);
+                Console.WriteLine("Issue number: " + issue.number);
+            }
         }
     }
 }
